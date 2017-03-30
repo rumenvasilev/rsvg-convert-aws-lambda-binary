@@ -1,4 +1,4 @@
-sudo yum install shared-mime-info cairo cairo-devel cairo-gobject-devel gobject-introspection gobject-introspection-devel giflib-devel libjpeg-turbo-devel poppler-glib-devel pango-devel harfbuzz-devel -y
+sudo yum install shared-mime-info cairo cairo-devel cairo-gobject-devel gobject-introspection gobject-introspection-devel giflib-devel libjpeg-turbo-devel poppler-glib-devel pango-devel harfbuzz-devel libxml2-devel -y
 
 export PKG_CONFIG_PATH=/home/ec2-user/build/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig
 rm -rf build *.pdf
@@ -8,7 +8,7 @@ mkdir build
 curl -OL http://ftp.gnome.org/pub/GNOME/sources/libcroco/0.6/libcroco-0.6.8.tar.xz
 tar xf libcroco-0.6.8.tar.xz 
 cd libcroco-0.6.8
-./configure --prefix=/home/ec2-user/build --disable-shared --enable-static
+./configure --prefix=/home/ec2-user/build --disable-shared --enable-static LIBXML_CFLAGS=-I/usr/include/libxml2 LIBXML_LIBS=-L/usr/lib64/
 make && make install 
 cd ..
 
@@ -35,4 +35,3 @@ cd ..
 
 #./build/bin/rsvg-convert map.svg -o map-x.pdf -f pdf
 #ls -la *.pdf
-
